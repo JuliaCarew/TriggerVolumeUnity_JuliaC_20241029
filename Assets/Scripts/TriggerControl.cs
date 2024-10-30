@@ -6,13 +6,16 @@ public class TriggerControl : MonoBehaviour
 {
     public GameObject DoorOBS;
     public GameObject Wall_L_02;
-    public GameObject Winbox;
     public GameObject HallLight;
+
+    public GameObject Wall_L_03;
+    public GameObject Winbox;
 
     public void Start()
     {
         DoorOBS.SetActive(true);
         Wall_L_02.SetActive(true);
+        Wall_L_03.SetActive(true);
         // set Winbox emission OFF
         Winbox.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
         Winbox.GetComponent<MeshRenderer>().material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
@@ -29,6 +32,10 @@ public class TriggerControl : MonoBehaviour
         Winbox.GetComponent<MeshRenderer>().material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.None;
 
         HallLight.SetActive(true);
+        if (other.gameObject.tag == "Push")
+        {
+            Wall_L_03.SetActive(false);
+        }
 
     }
     public void OnTriggerExit(Collider other)
@@ -36,5 +43,6 @@ public class TriggerControl : MonoBehaviour
         // set Winbox emission OFF
         Winbox.GetComponent<MeshRenderer>().material.DisableKeyword("_EMISSION");
         Winbox.GetComponent<MeshRenderer>().material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+        Wall_L_03.SetActive(true);
     }
 }
